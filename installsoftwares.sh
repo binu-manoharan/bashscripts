@@ -27,8 +27,10 @@ function installRsync {
     echo "*** Attempting to install rsync ***"
     if [[ $INSTALLER == "pacman" ]]; then
 	echo "sudo pacman -S rsync"
+	sudo pacman -S rsync
     elif [[ $INSTALLER == "apt-get" ]]; then
 	echo "sudo apt-get install rsync"
+	sudo apt-get install rsync
     else
 	echo "No suitable installer found"
 	exit
