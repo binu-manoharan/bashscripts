@@ -31,6 +31,14 @@ function moveRamdiskRelatedFiles {
 
 function createRamDiskDir {
     RAMDISKDIR="$HOME/ramdisk"
+    RAMDISKMOUNTDIR="/mnt/ramdisk"
+
+    if [[ -d $RAMDISKMOUNTDIR ]]; then
+	echo "Mount directory ($RAMDISKMOUNTDIR) exists.. Not creating"
+    else
+	echo "Creating mount directory /mnt/ramdisk"
+	sudo mkdir -p /mnt/ramdisk
+    fi
     
     if [[ -d $RAMDISKDIR ]]; then
 	echo "$RAMDISKDIR exists.. Not creating"
