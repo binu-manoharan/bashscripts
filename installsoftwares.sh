@@ -10,16 +10,27 @@ function findInstaller {
     fi
 }
 
+function installSoftwares {
+    echo
+    promptYesNo "attempt of installation of softwares - Rsync & Xclip"
+    if [[ $PROMPT_RESPONSE =~ ^[Yy]$ ]]; then
+	echo
+	checkAndInstallRsync
+	echo
+	checkAndInstallXclip
+    else
+	echo "Rsync and Xclip are not going to be checked for installation!"
+    fi
+    echo
+}
 
 function checkAndInstallRsync {
-    echo
     local typeRsync=$(type rsync 2>&1)
     if [[ $typeRsync == *"not found"* ]]; then
 	installRsync
     else
 	echo "Rsync already installed!"
     fi
-    echo
 }
 
 function installRsync {
@@ -38,14 +49,12 @@ function installRsync {
 }
 
 function checkAndInstallXclip {
-    echo
     local typeXclip=$(type xclip 2>&1)
     if [[ $typeXclip == *"not found"* ]]; then
 	installXclip
     else
 	echo "Xclip already installed!"
     fi
-    echo
 }
 
 function installXclip {
