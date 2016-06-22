@@ -1,0 +1,19 @@
+function _showHex {
+  printf "%x\n" $1
+  printf "%x" $1 | xclip -selection c -in
+}
+
+alias hex=_showHex
+
+function _showDec {
+  if [[ $1 == "0x"* ]]; 
+  then
+    printf "%d\n" $1
+    printf "%d" $1 | xclip -selection c -in
+  else
+    printf "%d\n" 0x$1
+    printf "%d" 0x$1 | xclip -selection c -in
+  fi
+}
+
+alias dec=_showDec

@@ -4,9 +4,11 @@
 #PROMPT_RESPONSE contains response to last promptYesNo
 
 source ./functions.sh
-source ./installsoftwares.sh
 source ./yesnooption.sh
+source ./installsoftwares.sh
+source ./addConfig.sh
 
 installSoftwares
-   
+addTemplateConfigToStartUp
+
 exit
