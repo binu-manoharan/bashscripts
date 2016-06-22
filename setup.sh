@@ -3,10 +3,8 @@
 source ./functions.sh
 source ./installsoftwares.sh
 
-helloworld
-
-hasRsync
-hasXclip
+checkAndInstallRsync
+checkAndInstallXclip
 
 
 

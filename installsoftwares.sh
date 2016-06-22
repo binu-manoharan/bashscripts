@@ -11,7 +11,7 @@ function findInstaller {
 }
 
 
-function hasRsync {
+function checkAndInstallRsync {
     echo
     local typeRsync=$(type rsync 2>&1)
     if [[ $typeRsync == *"not found"* ]]; then
@@ -19,6 +19,7 @@ function hasRsync {
     else
 	echo "Rsync already installed!"
     fi
+    echo
 }
 
 function installRsync {
@@ -34,7 +35,7 @@ function installRsync {
     fi
 }
 
-function hasXclip {
+function checkAndInstallXclip {
     echo
     local typeXclip=$(type xclip 2>&1)
     if [[ $typeXclip == *"not found"* ]]; then
@@ -42,6 +43,7 @@ function hasXclip {
     else
 	echo "Xclip already installed!"
     fi
+    echo
 }
 
 function installXclip {
