@@ -10,7 +10,7 @@ source ./installsoftwares.sh
 source ./addconfig.sh
 source ./setupramdisk.sh
 
-#installSoftwares
-#addTemplateConfigToStartUp
+installSoftwares
+addTemplateConfigToStartUp
 setUpRamDisk
-exit
+
