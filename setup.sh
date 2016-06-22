@@ -2,11 +2,15 @@
 
 #INSTALLER - contains pacman/apt-get
 #PROMPT_RESPONSE contains response to last promptYesNo
+#RAMDISKDIR directory for ramdisk stuffs
 
 source ./functions.sh
-source ./installsoftwares.sh
 source ./yesnooption.sh
+source ./installsoftwares.sh
+source ./addconfig.sh
+source ./setupramdisk.sh
 
 installSoftwares
-   
-exit
+addTemplateConfigToStartUp
+setUpRamDisk
+
