@@ -2,16 +2,16 @@
 
 function addConfig {
     cfgfile=.$USER.config
-    echo "sudo cp ./configtemplate $HOME/$cfgfile"
-    sudo cp ./configtemplate $HOME/$cfgfile
+    echo "cp ./configtemplate $HOME/$cfgfile"
+    cp ./configtemplate $HOME/$cfgfile
     if [[ -w $HOME/.profile ]]; then
 	echo "Added line to .profile: . ./$cfgfile"
-	echo ". ./$cfgfile" >> $HOME/.profile
+	echo ". $HOME/$cfgfile" >> $HOME/.profile
     fi
     
     if [[ -w $HOME/.bashrc ]]; then
 	echo "Added line to .bashrc: . ./$cfgfile"
-	echo ". ./$cfgfile" >> $HOME/.bashrc
+	echo ". $HOME/$cfgfile" >> $HOME/.bashrc
     fi
 }
 
@@ -25,5 +25,4 @@ function addTemplateConfigToStartUp {
 	echo "Not adding to profile files!"
     fi
     echo
-    
 }
