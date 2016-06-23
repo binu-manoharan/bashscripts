@@ -14,4 +14,5 @@ source ./setupramdisk.sh
 installSoftwares
 addTemplateConfigToStartUp
 setUpRamDisk
+startCleanRamdisk
 
