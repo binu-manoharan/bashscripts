@@ -41,4 +41,3 @@ function startCleanRamdisk {
     echo "Database is ready to use :)"
 }
 
-startCleanRamdisk
