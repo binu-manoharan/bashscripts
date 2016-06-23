@@ -6,10 +6,10 @@ findServiceCommand
 
 if [[ $SERVICECMD == "systemctl" ]]; then
     echo "sudo systemctl stop mysqld"
-    sudo systemctl stop mysqld || exit
+    sudo systemctl stop mysqld
 elif [[ $SERVICECMD == "service" ]]; then
     echo "sudo service mysql stop"
-    sudo service mysql stop || exit
+    sudo service mysql stop
 else
     echo "Unsupport service stop command"
     exit
