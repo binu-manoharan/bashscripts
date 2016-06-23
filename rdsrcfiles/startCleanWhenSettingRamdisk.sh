@@ -1,7 +1,5 @@
 #! /bin/bash
 
-source $HOME/ramdisk/checkInitServiceCommand.sh
-
 function startCleanRamdisk {
     findServiceCommand
 
