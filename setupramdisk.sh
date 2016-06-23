@@ -8,6 +8,10 @@ function setUpRamDisk {
     #This method always needs to be called first to initialised $RAMDISKDIR
     createRamDiskDir
 
+    echo
+    echo "$SERVICECMD"
+    echo
+    
     if [[ $SERVICECMD == "service" ]]; then
 	#Only needed on ubuntu - service start relies on /etc/mysql/my.cnf to have the
 	#right. Ubuntu comes with AppArmor (Security stuff) which has usr.sbin.mysqld
