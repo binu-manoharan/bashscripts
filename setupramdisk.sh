@@ -127,9 +127,9 @@ function makeAppArmorChanges {
 	echo "sudo cp $apparmormysqlfile $RAMDISKDIR/backup/usr.sbin.mysqld_$backupdate"
 	sudo cp $apparmormysqlfile $RAMDISKDIR/backup/usr.sbin.mysqld_$backupdate
 
-	echo "sudo sed -i 's/}/QWERTYUIOP}/' $apparmormysqlfile"
-	sudo sed -i 's/}/QWERTYUIOP}/' $apparmormysqlfile
-	sudo sed -i 's/}/ASDFGHJKL}/' $apparmormysqlfile
+	echo "Updating $apparmormysqlfile"
+	sudo sed -i 's/}/QWERTYUIOP\n}/' $apparmormysqlfile
+	sudo sed -i 's/}/ASDFGHJKL\n}/' $apparmormysqlfile
 
 	sudo sed -i 's/QWERTYUIOP/\/mnt\/ramdisk\/ r,/' $apparmormysqlfile
 	sudo sed -i 's/ASDFGHJKL/\/mnt\/ramdisk\/** rwk,/' $apparmormysqlfile
