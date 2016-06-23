@@ -17,7 +17,7 @@ function startCleanRamdisk {
     sudo umount /mnt/ramdisk
 
     sudo mount -t tmpfs -o size=8192m tmpfs /mnt/ramdisk
-    sudo mysql_install_db --user=mysql --datadir=/mnt/ramdisk/
+    sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/mnt/ramdisk/
     sudo chown -R mysql:mysql /mnt/ramdisk
 
     if [[ $SERVICECMD == "systemctl" ]]; then
