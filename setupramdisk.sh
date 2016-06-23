@@ -5,6 +5,8 @@ function setUpRamDisk {
     echo "Setting up ramdisk for mysql"
     echo
 
+    findServiceCommand
+    
     #This method always needs to be called first to initialised $RAMDISKDIR
     createRamDiskDir
 
@@ -83,13 +85,14 @@ function createMysqlCnfFiles {
 	echo "sudo cp $mysqlcnf $RAMDISKDIR"
 	sudo cp $mysqlcnf $RAMDISKDIR
 	
-	echo "Backing up existing my.cnf in $RAMDISK/my.cnf_$backupdate"
+	echo "Backing up existing my.cnf in $RAMDISKDIR/my.cnf_$backupdate"
 	sudo cp $RAMDISKDIR/my.cnf $RAMDISKDIR/backup/my.cnf_$backupdate
 
 	echo "Creating new my.cnf for use by ramdisk -> $ramdiskmycnf & updating data directory"
 	sudo mv $RAMDISKDIR/my.cnf $ramdiskmycnf
-	sudo sed -i 's/datadir/#datadir/g' $ramdiskmycnf
-	sudo echo "datadir = /mnt/ramdisk" >> $ramdiskmycnf
+	sudo chmod 777 $ramdiskmycnf
+	sed -i 's/datadir/#datadir/g' $ramdiskmycnf
+	echo "datadir = /mnt/ramdisk" >> $ramdiskmycnf
 
 	echo
 	echo "Diff in mysql new my.cnf vs current my.cnf"
