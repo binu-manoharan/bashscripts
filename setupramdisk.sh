@@ -8,9 +8,29 @@ function setUpRamDisk {
     #This method always needs to be called first to initialised $RAMDISKDIR
     createRamDiskDir
 
-    #    createMysqlCnfFiles --might be needed on ubuntu
+    if [[ $SERVICECMD == "service" ]]; then
+	#Only needed on ubuntu - service start relies on /etc/mysql/my.cnf to have the
+	#right. Ubuntu comes with AppArmor (Security stuff) which has usr.sbin.mysqld
+	#which needs changes as well.
 
+	createMysqlBackUpDir
+	
+	createMysqlCnfFiles
+
+	makeAppArmorChanges
+    fi
+	
     moveRamdiskRelatedFiles
+}
+
+function createMysqlBackUpDir {
+    if [[ -d $RAMDISKDIR/backup ]]; then
+	echo "Backup directory exist.. not creating."
+    else
+	echo "Make back up directory"
+	echo "mkdir -p $RAMDISKDIR/backup"
+	mkdir -p $RAMDISKDIR/backup
+    fi
 }
 
 function moveRamdiskRelatedFiles {
@@ -38,6 +58,9 @@ function createRamDiskDir {
     else
 	echo "Creating mount directory /mnt/ramdisk"
 	sudo mkdir -p /mnt/ramdisk
+
+	echo "Updating owner for $RAMDISKMOUNTDIR"
+	sudo chown -R mysql:mysql $RAMDISKMOUNTDIR
     fi
     
     if [[ -d $RAMDISKDIR ]]; then
@@ -61,7 +84,7 @@ function createMysqlCnfFiles {
 	sudo cp $mysqlcnf $RAMDISKDIR
 	
 	echo "Backing up existing my.cnf in $RAMDISK/my.cnf_$backupdate"
-	sudo cp $RAMDISKDIR/my.cnf $RAMDISKDIR/my.cnf_$backupdate
+	sudo cp $RAMDISKDIR/my.cnf $RAMDISKDIR/backup/my.cnf_$backupdate
 
 	echo "Creating new my.cnf for use by ramdisk -> $ramdiskmycnf & updating data directory"
 	sudo mv $RAMDISKDIR/my.cnf $ramdiskmycnf
@@ -81,3 +104,20 @@ function createMysqlCnfFiles {
     fi
 }
 
+function makeAppArmorChanges {
+    local apparmormysqlfile="/etc/apparmor.d/usr.sbin.mysqld"
+    
+    if [[ -a $apparmormysqlfile ]]; then
+	local backupdate=`date +%Y%m%d%H%M`
+
+	echo "sudo cp $apparmormysqlfile $RAMDISKDIR/backup/usr.sbin.mysqld_$backupdate"
+	sudo cp $apparmormysqlfile $RAMDISKDIR/backup/usr.sbin.mysqld_$backupdate
+
+	echo "sudo sed -i 's/}/QWERTYUIOP}/' $apparmormysqlfile"
+	sudo sed -i 's/}/QWERTYUIOP}/' $apparmormysqlfile
+	sudo sed -i 's/}/ASDFGHJKL}/' $apparmormysqlfile
+
+	sudo sed -i 's/QWERTYUIOP/\/mnt\/ramdisk\/ r,/' $apparmormysqlfile
+	sudo sed -i 's/ASDFGHJKL/\/mnt\/ramdisk\/** rwk,/' $apparmormysqlfile
+    fi
+}
