@@ -100,8 +100,8 @@ function createMysqlCnfFiles {
 	sudo cp $ramdiskmycnf $mysqlcnf
 
 	echo "Copying new settings to /usr to work around a known mysql bug"
-	echo "sudo cp $ramdiskmycnf /usr"
-	sudo cp $ramdiskmycnf /usr
+	echo "sudo cp $ramdiskmycnf /usr/my-default.cnf"
+	sudo cp $ramdiskmycnf /usr/my-default.cnf
  
     else
 	echo "mysql config file missing from /etc/mysql/my.cnf"

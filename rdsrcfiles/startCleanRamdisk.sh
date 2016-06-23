@@ -6,16 +6,16 @@ findServiceCommand
 
 if [[ $SERVICECMD == "systemctl" ]]; then
     echo "sudo systemctl stop mysqld"
-    sudo systemctl stop mysqld
+    sudo systemctl stop mysqld || exit
 elif [[ $SERVICECMD == "service" ]]; then
     echo "sudo service mysql stop"
-    sudo service mysql stop
+    sudo service mysql stop || exit
 else
     echo "Unsupport service stop command"
     exit
 fi
 
-sudo umount /mnt/ramdisk
+sudo umount /mnt/ramdisk || exit
 
 sudo mount -t tmpfs -o size=8192m tmpfs /mnt/ramdisk
 sudo mysql_install_db --user=mysql --datadir=/mnt/ramdisk/
