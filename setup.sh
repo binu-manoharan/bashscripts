@@ -9,6 +9,7 @@ source ./yesnooption.sh
 source ./installsoftwares.sh
 source ./addconfig.sh
 source ./rdsrcfiles/checkInitServiceCommand.sh
+source ./rdsrcfiles/startCleanWhenSettingRamdisk.sh
 source ./setupramdisk.sh
 
 installSoftwares
