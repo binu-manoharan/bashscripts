@@ -95,10 +95,7 @@ function createMysqlCnfFiles {
 	sudo chmod 777 $ramdiskmycnf
 
 	echo "sudo sed -i 's/datadir/#datadir/g' $ramdiskmycnf"
-	sudo sed -i 's/datadir/#datadir/g' $ramdiskmycnf
-
-	echo "sudo echo \"datadir = /mnt/ramdisk\" >> $ramdiskmycnf"
-	sudo echo "datadir = /mnt/ramdisk" >> $ramdiskmycnf
+	sudo sed -i 's/datadir/datadir = \/mnt\/ramdisk\n#datadir/' $ramdiskmycnf
 
 	echo
 	echo "Diff in mysql new my.cnf vs current my.cnf"

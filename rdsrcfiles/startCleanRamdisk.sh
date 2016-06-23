@@ -15,7 +15,7 @@ else
     exit
 fi
 
-sudo umount /mnt/ramdisk || exit
+sudo umount /mnt/ramdisk
 
 sudo mount -t tmpfs -o size=8192m tmpfs /mnt/ramdisk
 sudo mysql_install_db --user=mysql --datadir=/mnt/ramdisk/
