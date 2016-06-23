@@ -17,3 +17,122 @@ function _showDec {
 }
 
 alias dec=_showDec
+
+#Feel free to use as many of the below alias/functions as you like. Please check them before using though as some of the rsync ones can try to delete stuffs from where you may not want it to.
+#alias idea="opt/idea-IU-141.1532.4/bin/idea.sh"
+#alias KDIR='cd /home/binu/dev/code/i-nexus/karma'
+#alias NEX='cd /home/binu/dev/code/i-nexus'
+#alias TA='cd /home/binu/dev/code/test-automation'
+#alias INST='cd /home/binu/Downloads/installers'
+#alias gitb='git branch --list'
+#alias gitbl='git branch --list'
+#alias gits='git status'
+#alias gitl='git log'
+#alias utest='gradle :nexus:test'
+#alias startrd='/home/binu/ramdisktest/setupRamdiskWithCleanDBData.sh'
+#alias startrdclean='/home/binu/ramdisktest/setupRamdiskWithoutDBData.sh'
+#alias lsrdbk='ls -ltr /home/binu/ramdisktest/ | grep ^d'
+#alias standalonetestrunnertestdir='cd /home/binu/dev/code/i-nexus/build/modules/fixes/alstom-ge-transport-migration/classes/test'
+#
+#CSR=`cat /home/binu/CSRs/currentcsr`
+#
+#alias csr="cd /home/binu/CSRs/CSR"
+#alias has='cd /home/binu/playground/haskell'
+#
+##Minor modifications to shell
+#
+##original PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$"
+#PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\h [\$(date +%H:%M)] \w $ "
+#
+##FUNCTIONS and corresponding alias
+#
+#function _gitsearch {
+#   git log --all --grep="$*"
+#}
+#
+#alias gitsearch=_gitsearch
+#
+#alias synccleandb='sudo systemctl stop mysqld;sudo rsync -av --delete  /mnt/ramdisk/ /home/binu/ramdisktest/cleanDBDataBackup/;sudo systemctl start mysqld'
+#
+#function _backupDBData {
+#  if [[ -z $1 ]];
+#  then
+#    echo "No arguments supplied"
+#  else
+#    if [[ $1 == "cleanDBDataBackup" ]];
+#    then
+#      echo "Cannot delete source backup directory."
+#    else
+#      sudo rsync -av --delete /home/binu/ramdisktest/cleanDBDataBackup/ /home/binu/ramdisktest/$1/
+#    fi  
+#  fi
+#}
+#
+#alias backupdbdata=_backupDBData
+#
+#function _restoreDBData {
+#  if [[ -z $1 ]];
+#  then
+#    echo "No arguments supplied"
+#  else
+#    if [[ $1 == "cleanDBDataBackup" ]];
+#    then
+#      echo "Cannot select destination directory."
+#    else
+#      if [[ -d /home/binu/ramdisktest/$1 ]];
+#      then
+#        sudo rsync -av --delete /home/binu/ramdisktest/$1/ /home/binu/ramdisktest/cleanDBDataBackup/
+#      else
+#        echo "Invalid backup directory."
+#      fi
+#    fi  
+#  fi
+#}
+#
+#alias restoredbdata=_restoreDBData
+#
+#
+#
+#function _lss {
+#  if [[ -z $1 ]];
+#  then
+#    ls -lrSh
+#  else
+#    ls -lrSh $1
+#  fi
+#}
+#alias lss='ls -lrSh'
+#
+#function _lsd {
+#  if [[ -z $1 ]];
+#  then
+#    ls -ltr | grep ^d
+#  else
+#    ls -ltr $1 | grep ^d
+#  fi
+#}
+#
+#alias lsd=_lsd
+#
+#function _lsf {
+#  if [[ -z $1 ]];
+#  then
+#    ls -ltr | grep ^-
+#  else
+#    ls -ltr $1 | grep ^-
+#  fi
+#}
+#
+#alias lsf=_lsf
+#
+#function _dietomcat {
+#  sudo /usr/share/tomcat8/bin/shutdown.sh
+#
+#  if [[ -a /usr/share/tomcat8/bin/setenv.sh ]]; then
+#    echo "Removing setenv.sh from tomcat/bin"
+#    sudo rm /usr/share/tomcat8/bin/setenv.sh
+#  fi
+#    
+#}
+#
+#alias dietomcat=_dietomcat
